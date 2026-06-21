@@ -25,6 +25,21 @@ export const post = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
+      name: 'category',
+      title: '分類',
+      type: 'string',
+      options: {
+        list: [
+          {title: '作品 (Artwork)', value: 'artwork'},
+          {title: '影像集 (Gallery)', value: 'gallery'},
+          {title: '散文創作 (Essay)', value: 'essay'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'artwork',
+      validation: (r) => r.required(),
+    }),
+    defineField({
       name: 'cover',
       title: '封面影像',
       type: 'image',
