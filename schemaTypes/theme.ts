@@ -25,5 +25,19 @@ export const theme = defineType({
       type: 'text',
       rows: 3,
     }),
+    defineField({
+      name: 'cover',
+      title: '主題封面',
+      description: '主題索引頁的代表影像。',
+      type: 'image',
+      options: {hotspot: true},
+      fields: [{name: 'alt', title: '替代文字', type: 'string'}],
+    }),
+    defineField({
+      name: 'order',
+      title: '排序權重',
+      description: '數字越小越前面；留空則依名稱排序。',
+      type: 'number',
+    }),
   ],
 })
