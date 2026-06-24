@@ -65,14 +65,18 @@ export const post = defineType({
       name: 'cover',
       title: '封面影像',
       type: 'image',
-      options: {hotspot: true}, // hotspot = 焦點裁切，攝影必備
+      options: {
+        hotspot: true, // hotspot = 焦點裁切，攝影必備
+        // 抽取 EXIF＋GPS：餵「觀看的機器」真簽名（階段 H）。lqip 保留（階段 G 顯影依賴）。
+        metadata: ['lqip', 'palette', 'dimensions', 'exif', 'location'],
+      },
       fields: [{name: 'alt', title: '替代文字（無障礙/SEO）', type: 'string'}],
     }),
     defineField({
       name: 'capture',
-      title: '拍攝資料（選填・餵「檔案簽名」）',
+      title: '拍攝資料（選填・覆寫「檔案簽名」）',
       description:
-        '有填就用真的，沒填則由 slug 生成決定性的座標／編碼（觀看的機器・半真化）。座標可留空。',
+        '優先序：此處手填 ＞ 封面 EXIF/GPS ＞ slug 生成（觀看的機器・半真化）。座標可留空。',
       type: 'object',
       options: {collapsible: true, collapsed: true},
       fields: [
