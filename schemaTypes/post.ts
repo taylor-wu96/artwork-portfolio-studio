@@ -110,7 +110,21 @@ export const post = defineType({
       title: '內文',
       type: 'array',
       of: [
-        {type: 'block'},
+        {
+          type: 'block',
+          marks: {
+            // 旁註（報導者式 margin note）：選取文字後加註，桌機顯示於右側頁邊、
+            // 行動裝置 inline 展開。前台序列化器：Sidenote.astro（階段 K1）。
+            annotations: [
+              {
+                name: 'sidenote',
+                type: 'object',
+                title: '旁註',
+                fields: [{name: 'note', type: 'text', title: '註解內容', rows: 3}],
+              },
+            ],
+          },
+        },
         {
           type: 'image',
           options: {hotspot: true},
