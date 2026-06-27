@@ -100,7 +100,9 @@ export const post = defineType({
       of: [
         {
           type: 'image',
-          options: {hotspot: true},
+          // 抽 EXIF/GPS＋lqip/dimensions：每一張底片都能讓「觀看的機器」讀數（階段 H1）。
+          // 不抽 palette（影像集縮圖不需配色）。註：僅對新上傳生效，舊圖需重傳回填。
+          options: {hotspot: true, metadata: ['lqip', 'dimensions', 'exif', 'location']},
           fields: [{name: 'caption', title: '說明', type: 'string'}],
         },
       ],
@@ -127,7 +129,8 @@ export const post = defineType({
         },
         {
           type: 'image',
-          options: {hotspot: true},
+          // 內文插圖同樣抽 metadata：dimensions 杜絕 CLS、lqip 顯影、exif 供讀檔。
+          options: {hotspot: true, metadata: ['lqip', 'dimensions', 'exif', 'location']},
           fields: [{name: 'alt', title: '替代文字', type: 'string'}],
         },
       ],
